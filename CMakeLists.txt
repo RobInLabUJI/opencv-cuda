@@ -9,6 +9,12 @@ add_executable( canny src/videocapture.cpp
 
 target_link_libraries( canny ${OpenCV_LIBS} )
 
+add_executable( stereo_canny src/stereocapture.cpp 
+			    src/canny/cpu_processing.cpp 
+			    src/canny/gpu_processing.cpp)
+
+target_link_libraries( stereo_canny ${OpenCV_LIBS} )
+
 add_executable( optical_flow src/videocapture.cpp 
 			    src/optical_flow/cpu_processing.cpp 
 			    src/optical_flow/gpu_processing.cpp)
