@@ -1,0 +1,11 @@
+xhost +local:root
+docker run --rm \
+    --runtime nvidia \
+    --env="DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    --device=/dev/video0:/dev/video0 \
+    opencv-cuda \
+    /root/build/videocapture
+xhost -local:root
+
