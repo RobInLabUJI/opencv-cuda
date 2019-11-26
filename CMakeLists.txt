@@ -21,6 +21,12 @@ add_executable( optical_flow src/videocapture.cpp
 
 target_link_libraries( optical_flow ${OpenCV_LIBS} )
 
+add_executable( orb src/videocapture.cpp 
+			    src/orb/cpu_processing.cpp 
+			    src/orb/gpu_processing.cpp)
+
+target_link_libraries( orb ${OpenCV_LIBS} )
+
 #add_executable( lane_detector src/videocapture.cpp 
 #			    src/lane_detector/LaneDetector.cpp 
 #			    src/lane_detector/cpu_processing.cpp 
