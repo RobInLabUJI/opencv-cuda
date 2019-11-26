@@ -13,11 +13,11 @@ extern void gpu_processing(cv::Mat& in, cv::Mat& out);
 
 int main(int, char**)
 {
-  int i=0;
-  double t[30];
   cv::Mat frame, dst;
   cv::VideoCapture cap;
   bool use_gpu = false;
+  int i, n;
+  double t[30];
   for (i=0;i<30;i++) t[i]=0.0;
 
   cap.open("project_video.mp4");
@@ -32,6 +32,7 @@ int main(int, char**)
   int fps = cap.get(CV_CAP_PROP_FPS);
   int delay = 1000 / fps;
   i = 0;
+  n = 0;
   while ( cap.isOpened() )
   {
     clock_t startTime = clock();
@@ -51,10 +52,11 @@ int main(int, char**)
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
     double duration = chrono::duration_cast<chrono::microseconds>(end - begin).count()/1000.0;
 	t[i++] = duration;
+    if (n<30) n++;
     if (i==30) i=0;
     double m=0;
-    for(int j=0;j<30;j++) m+=t[j];
-    m /= 30;
+    for(int j=0;j<n;j++) m+=t[j];
+    m /= n;
     cv::String message;
     if (use_gpu) {
       message = cv::format("GPU processing time[ms]=%.3f", m);
@@ -67,10 +69,16 @@ int main(int, char**)
     int pause = delay-int(duration);
     if (pause < 1) pause = 1;
     int key = cv::waitKey(pause); 
-    if ( key == 'g')
+    if ( key == 'g') {
        use_gpu = true;
-    if ( key == 'c')
+       n = 0;
+ 	   i = 0;
+    }
+    if ( key == 'c') {
        use_gpu = false;
+       n = 0;
+ 	   i = 0;
+    }
     if ( key == 'q')
       break;
   }
