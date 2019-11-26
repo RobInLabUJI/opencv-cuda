@@ -1,10 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/types.hpp>
 #include <iostream>
-#include <chrono>
-
-//#include <opencv2/cudaimgproc.hpp>
-//#include <opencv2/cudafilters.hpp>
 
 using namespace std;
 
@@ -29,29 +25,28 @@ int main(int, char**)
        << "Press c to use CPU" << endl
        << "Press g to use GPU" << endl
        << "Press q to terminate" << endl;
-  int fps = cap.get(CV_CAP_PROP_FPS);
+  int fps = 25;
   int delay = 1000 / fps;
   i = 0;
   n = 0;
   while ( cap.isOpened() )
   {
-    clock_t startTime = clock();
     cap.read(frame);
     if (frame.empty()) {
       cerr << "ERROR! blank frame grabbed\n";
       break;
     }
+    cv::cvtColor( frame, frame, cv::COLOR_RGB2BGR );
     dst.create( frame.size(), frame.type() );
 
-    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+    double ticks = (double)cv::getTickCount();
     if (use_gpu) {
         gpu_processing(frame, dst);
     } else {
         cpu_processing(frame, dst);
     }
-    chrono::steady_clock::time_point end = chrono::steady_clock::now();
-    double duration = chrono::duration_cast<chrono::microseconds>(end - begin).count()/1000.0;
-	t[i++] = duration;
+    ticks = ((double)cv::getTickCount() - ticks)/cv::getTickFrequency()*1000;
+	t[i++] = ticks;
     if (n<30) n++;
     if (i==30) i=0;
     double m=0;
@@ -66,7 +61,7 @@ int main(int, char**)
     cv::putText(dst, message, cv::Point(30, 30), 
                 cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(0,0,255));
     cv::imshow("Live", dst);
-    int pause = delay-int(duration);
+    int pause = delay-int(ticks);
     if (pause < 1) pause = 1;
     int key = cv::waitKey(pause); 
     if ( key == 'g') {
@@ -84,5 +79,4 @@ int main(int, char**)
   }
   return 0;
 }
-
 

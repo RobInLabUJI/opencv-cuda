@@ -1,10 +1,11 @@
 xhost +local:root
 docker run --rm \
-    --runtime nvidia \
+    --gpus all \
     --env="DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    --volume="$(pwd):/root/demos:rw" \
     opencv-cuda \
-    /root/build/$1
+    /root/demos/build/$1
 xhost -local:root
 

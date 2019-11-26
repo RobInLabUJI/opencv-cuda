@@ -1,0 +1,5 @@
+docker run --rm \
+    --volume="$(pwd):/root/demos:rw" \
+    opencv-cuda \
+    /bin/bash -c "mkdir -p build && cd build && cmake .. && make"
+
