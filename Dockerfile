@@ -19,7 +19,7 @@ RUN apt-get update \
 ADD include /root/include
 ADD src /root/src
 
-ADD README.txt CMakeLists.txt project_video.mp4 I1_out.mp4 I2_out.mp4 /root/
+ADD README.txt CMakeLists.txt project_video.mp4 /root/
 
 WORKDIR /root
 
