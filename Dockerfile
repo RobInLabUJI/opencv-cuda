@@ -48,6 +48,7 @@ RUN apt-get update && \
         python3-dev \
         python3-numpy \
         libvtk6-dev \
+        libxine2 \
         && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
@@ -106,10 +107,6 @@ RUN export NUMPROC=$(nproc --all) \
 
 RUN rm -r /opencv-$OPENCV_VERSION \
     && rm -r /opencv_contrib-$OPENCV_VERSION
-
-RUN apt-get update \
-    && apt-get install -y libxine2 \
-    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /root/demos
 
