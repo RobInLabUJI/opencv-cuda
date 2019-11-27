@@ -53,8 +53,6 @@ RUN apt-get update && \
 
 WORKDIR /
 
-## Single command to reduce image size
-## Build opencv
 RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip \
     && unzip opencv.zip \
     && rm opencv.zip
