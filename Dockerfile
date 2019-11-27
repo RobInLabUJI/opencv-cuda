@@ -4,68 +4,32 @@ ARG OPENCV_VERSION=3.4.0
 
 RUN apt-get update && \
         apt-get install -y \
-        libcairo-dev libgdk-pixbuf2.0-dev \
+        cmake g++ build-essential git wget unzip yasm pkg-config \
+        python3 python-pip python-dev python-numpy python3-dev python3-numpy \
+        libcairo-dev libgdk-pixbuf2.0-dev libswscale.dev libgphoto2-dev \
         libdc1394-22-dev libavcodec-dev libavformat-dev libavutil-dev \
-        libswscale.dev libgphoto2-dev \
-        python3 cmake g++ \
-        libwebp-dev libpng-dev \
-        libtiff-dev libopenexr-dev \
-        python-pip \
-        build-essential \
-        cmake \
-        git \
-        wget \
-        unzip \
-        yasm \
-        pkg-config \
-        libswscale-dev \
-        libtbb2 \
-        libtbb-dev \
-        libjpeg-dev \
-        libpng-dev \
-        libtiff-dev \
-        libjasper-dev \
-        libavformat-dev \
-        libpq-dev \
-        libxine2-dev \
-        libglew-dev \
-        libtiff5-dev \
-        zlib1g-dev \
-        libjpeg-dev \
-        libpng12-dev \
-        libjasper-dev \
-        libavcodec-dev \
-        libavformat-dev \
-        libavutil-dev \
-        libpostproc-dev \
-        libswscale-dev \
-        libeigen3-dev \
-        libtbb-dev \
-        libgtk2.0-dev \
-        pkg-config \
-        python-dev \
-        python-numpy \
-        python3-dev \
-        python3-numpy \
-        libvtk6-dev \
-        libxine2 \
+        libwebp-dev libpng-dev libtiff-dev libopenexr-dev \
+        libswscale-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev \
+        libtiff-dev libjasper-dev libavformat-dev libpq-dev \
+        libxine2-dev libglew-dev libtiff5-dev zlib1g-dev \
+        libpng12-dev libjasper-dev libavcodec-dev libavformat-dev \
+        libavutil-dev libpostproc-dev libswscale-dev libeigen3-dev \
+        libtbb-dev libgtk2.0-dev libvtk6-dev libxine2 \
         && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
 
 RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip \
     && unzip opencv.zip \
-    && rm opencv.zip
-
-RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$OPENCV_VERSION.zip \
+    && rm opencv.zip \
+    && wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$OPENCV_VERSION.zip \
     && unzip opencv_contrib.zip \
-    && rm opencv_contrib.zip
-
-RUN mkdir /opencv-$OPENCV_VERSION/cmake_binary \
+    && rm opencv_contrib.zip \
+    && mkdir /opencv-$OPENCV_VERSION/cmake_binary \
     && cd /opencv-$OPENCV_VERSION/cmake_binary \
     && cmake -DBUILD_TIFF=ON \
        -DBUILD_opencv_java=OFF \
-       -DBUILD_SHARED_LIBS=OFF \
+       -DBUILD_SHARED_LIBS=ON \
        -DWITH_CUDA=ON \
        -DENABLE_FAST_MATH=1 \
        -DCUDA_FAST_MATH=1 \
@@ -97,13 +61,11 @@ RUN mkdir /opencv-$OPENCV_VERSION/cmake_binary \
        -DBUILD_PERF_TESTS=OFF \
        -DCMAKE_BUILD_TYPE=RELEASE \
        -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-$OPENCV_VERSION/modules \
-    ..
-
-RUN export NUMPROC=$(nproc --all) \
+    .. \
+    && export NUMPROC=$(nproc --all) \
     && cd /opencv-$OPENCV_VERSION/cmake_binary \
-    && make -j$NUMPROC install
-
-RUN rm -r /opencv-$OPENCV_VERSION \
+    && make -j$NUMPROC install \
+    && rm -r /opencv-$OPENCV_VERSION \
     && rm -r /opencv_contrib-$OPENCV_VERSION
 
 RUN mkdir /root/demos
