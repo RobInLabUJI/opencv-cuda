@@ -36,3 +36,9 @@ This can take ~30 minutes or longer, depending on the PC hardware.
 ```
 ./build_image
 ```
+
+## Acknowledgments
+
+`project_video.mp4` courtesy of [Udacity's Advanced Line Finding Project](https://github.com/udacity/CarND-Advanced-Lane-Lines) ([MIT License](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/LICENSE))
+
+`Dockerfile` heavily based on [Thomas Herbin's file](https://github.com/loitho/docker-opencv-cuda) ([MIT License](https://github.com/loitho/docker-opencv-cuda/blob/master/LICENSE))
