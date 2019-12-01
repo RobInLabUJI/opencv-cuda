@@ -1,6 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/types.hpp>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ int main(int, char**)
   int i, n;
   double t[30];
   for (i=0;i<30;i++) t[i]=0.0;
+  ofstream out("result.txt");
 
   cap.open("project_video.mp4");
   if (!cap.isOpened()) {
@@ -52,6 +54,7 @@ int main(int, char**)
     double m=0;
     for(int j=0;j<n;j++) m+=t[j];
     m /= n;
+    out << m << endl;
     cv::String message;
     if (use_gpu) {
       message = cv::format("GPU processing time[ms]=%.3f", m);
@@ -77,6 +80,7 @@ int main(int, char**)
     if ( key == 'q')
       break;
   }
+  out.close();
   return 0;
 }
 
