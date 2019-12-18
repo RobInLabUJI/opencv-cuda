@@ -18,6 +18,18 @@ int main(int, char**)
   for (i=0;i<30;i++) t[i]=0.0;
   ofstream out("result.txt");
 
+    int CudaDevice;
+    if(cv::cuda::getCudaEnabledDeviceCount()==0)
+    {
+        cerr<<endl<<"ERROR: NO CudaEnabledDevice"<<endl;
+        exit(2);
+    }
+    else
+    {
+        CudaDevice = cv::cuda::getDevice();
+        cv::cuda::setDevice(CudaDevice);
+    }
+    
   cap.open("project_video.mp4");
   if (!cap.isOpened()) {
     cerr << "ERROR! Unable to open video\n";
