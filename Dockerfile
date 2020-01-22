@@ -63,7 +63,7 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DBUILD_TESTS=OFF \
        -DBUILD_PERF_TESTS=OFF \
        -DCMAKE_BUILD_TYPE=RELEASE \
-       -DCMAKE_LIBRARY_PATH=${CUDA_TOOLKIT_ROOT_DIR}/lib64/stubs \
+       -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs/ \
        -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-$OPENCV_VERSION/modules \
     .. \
     && export NUMPROC=$(nproc --all) \
