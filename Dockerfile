@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04
 
 ARG OPENCV_VERSION=3.4.0
 
@@ -31,6 +31,7 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DBUILD_opencv_java=OFF \
        -DBUILD_SHARED_LIBS=ON \
        -DWITH_CUDA=ON \
+       -DWITH_CUDNN=ON \
        -DENABLE_FAST_MATH=1 \
        -DCUDA_FAST_MATH=1 \
        -DWITH_CUBLAS=1 \
@@ -56,7 +57,9 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DWITH_GDAL=ON \
        -DWITH_1394=OFF \
        -DWITH_FFMPEG=OFF \
-       -DBUILD_PROTOBUF=OFF \
+       -DBUILD_PROTOBUF=ON \
+       -DBUILD_EXAMPLES=ON \
+       -DOPENCV_DNN_CUDA=ON \
        -DBUILD_TESTS=OFF \
        -DBUILD_PERF_TESTS=OFF \
        -DCMAKE_BUILD_TYPE=RELEASE \
