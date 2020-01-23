@@ -1,6 +1,6 @@
 FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04
 
-ARG OPENCV_VERSION=3.4.0
+ARG OPENCV_VERSION=3.4.6
 
 RUN apt-get update && \
         apt-get install -y \
