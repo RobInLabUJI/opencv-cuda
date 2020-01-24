@@ -1,0 +1,1 @@
+/root/demos/build/dnn_object_detection --config=/root/demos/src/dnn/yolov3.cfg --model=/root/demos/src/dnn/yolov3.weights --width=416 --height=416 --scale=0.00392 --rgb --classes=/root/demos/src/dnn/coco.names --backend=5 --target=6
