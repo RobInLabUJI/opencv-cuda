@@ -1,1 +1,1 @@
-docker build -t cuda4opencv/demos:opencv-3.4.6-cuda-8.0-cudnn7 .
+docker build -t cuda4opencv/demos:opencv-4.2.0-cuda-8.0-cudnn7 .
