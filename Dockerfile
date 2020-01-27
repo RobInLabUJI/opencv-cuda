@@ -2,7 +2,7 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 ARG OPENCV_VERSION=4.2.0
 
-RUN sudo apt -y remove x264 libx264-dev
+RUN apt -y remove x264 libx264-dev
 
 RUN apt-get update && \
         apt-get install -y \
