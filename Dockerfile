@@ -10,7 +10,7 @@ RUN apt-get update && \
         libdc1394-22-dev libavcodec-dev libavformat-dev libavutil-dev \
         libwebp-dev libpng-dev libtiff-dev libopenexr-dev \
         libswscale-dev libtbb2 libtbb-dev libjpeg8-dev libpng-dev \
-        libtiff-dev libjasper1-dev libavformat-dev libpq-dev \
+        libtiff-dev libjasper1 libavformat-dev libpq-dev \
         libxine2-dev libglew-dev libtiff-dev zlib1g-dev \
         libavcodec-dev libavformat-dev \
         libavutil-dev libpostproc-dev libswscale-dev libeigen3-dev \
