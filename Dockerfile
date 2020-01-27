@@ -56,7 +56,7 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        ## 5.0 binary code for devices with compute capability 5.0 and 5.2,
        ## 6.0 binary code for devices with compute capability 6.0 and 6.1,
        ##-DCUDA_ARCH_BIN='3.0 3.5 5.0 6.0 6.2' \
-       -DCUDA_ARCH_BIN='6.0 6.2' \
+       -DCUDA_ARCH_BIN='5.3 6.0 6.2' \
        -DCUDA_ARCH_PTX="" \
        ## AVX in dispatch because not all machines have it
        -DCPU_DISPATCH=AVX,AVX2 \
@@ -72,7 +72,7 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DWITH_XINE=ON \
        -DWITH_GDAL=ON \
        -DWITH_1394=OFF \
-       -DWITH_FFMPEG=OFF \
+       -DWITH_FFMPEG=ON \
        -DBUILD_PROTOBUF=ON \
        -DBUILD_EXAMPLES=ON \
        -DBUILD_TESTS=OFF \
