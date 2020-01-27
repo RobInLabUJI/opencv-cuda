@@ -6,7 +6,7 @@ docker run --rm -it \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$(pwd):/root/demos:rw" \
     --device=/dev/video0:/dev/video0 \
-    cuda4opencv/demos:opencv-4.2.0-cuda-8.0-cudnn7 \
+    cuda4opencv/demos:opencv-4.2.0-cuda-10.0-cudnn7 \
     /bin/bash
 xhost -local:root
 

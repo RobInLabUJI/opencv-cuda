@@ -3,3 +3,8 @@
 build
 
 *.mp4
+
+opencv-4.2.0
+
+opencv_contrib-4.2.0
+

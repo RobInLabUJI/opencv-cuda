@@ -4,6 +4,10 @@ build
 
 result.txt
 
+opencv-4.2.0
+
+opencv_contrib-4.2.0
+
 # Prerequisites
 *.d
 

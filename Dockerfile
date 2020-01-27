@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 
 ARG OPENCV_VERSION=4.2.0
 
@@ -31,11 +31,12 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DBUILD_opencv_java=OFF \
        -DBUILD_SHARED_LIBS=ON \
        -DWITH_CUDA=ON \
+       -DWITH_CUBLAS=ON \
        -DWITH_CUDNN=ON \
+       -DOPENCV_DNN_CUDA=ON \
        -DENABLE_FAST_MATH=1 \
        -DCUDA_FAST_MATH=1 \
-       -DWITH_CUBLAS=1 \
-       -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 \
+       -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 \
        ## Should compile for most card
        ## 3.5 binary code for devices with compute capability 3.5 and 3.7,
        ## 5.0 binary code for devices with compute capability 5.0 and 5.2,
@@ -60,7 +61,6 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DWITH_FFMPEG=OFF \
        -DBUILD_PROTOBUF=ON \
        -DBUILD_EXAMPLES=ON \
-       -DOPENCV_DNN_CUDA=ON \
        -DBUILD_TESTS=OFF \
        -DBUILD_PERF_TESTS=OFF \
        -DCMAKE_BUILD_TYPE=RELEASE \
