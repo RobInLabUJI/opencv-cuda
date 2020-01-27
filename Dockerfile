@@ -12,7 +12,7 @@ RUN apt-get update && \
         libswscale-dev libtbb2 libtbb-dev libjpeg8-dev libpng-dev \
         libtiff-dev libjasper1-dev libavformat-dev libpq-dev \
         libxine2-dev libglew-dev libtiff-dev zlib1g-dev \
-        libpng12-dev libjasper-dev libavcodec-dev libavformat-dev \
+        libavcodec-dev libavformat-dev \
         libavutil-dev libpostproc-dev libswscale-dev libeigen3-dev \
         libtbb-dev libgtk2.0-dev libvtk6-dev libxine2-dev \
         && rm -rf /var/lib/apt/lists/*
