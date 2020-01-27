@@ -2,6 +2,11 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 ARG OPENCV_VERSION=4.2.0
 
+RUN apt-get update && \
+        apt-get install -y \
+        software-properties-common \
+        && rm -rf /var/lib/apt/lists/*
+
 RUN add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
 
 RUN apt-get update && \
