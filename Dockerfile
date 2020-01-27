@@ -50,7 +50,7 @@ RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.
        -DOPENCV_DNN_CUDA=ON \
        -DENABLE_FAST_MATH=1 \
        -DCUDA_FAST_MATH=1 \
-       -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.0 \
+       -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.1 \
        ## Should compile for most card
        ## 3.5 binary code for devices with compute capability 3.5 and 3.7,
        ## 5.0 binary code for devices with compute capability 5.0 and 5.2,
