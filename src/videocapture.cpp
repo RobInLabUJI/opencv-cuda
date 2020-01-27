@@ -50,7 +50,7 @@ int main(int, char**)
       cerr << "ERROR! blank frame grabbed\n";
       break;
     }
-    cv::cvtColor( frame, frame, cv::COLOR_RGB2BGR );
+    //cv::cvtColor( frame, frame, cv::COLOR_RGB2BGR );
     dst.create( frame.size(), frame.type() );
 
     double ticks = (double)cv::getTickCount();

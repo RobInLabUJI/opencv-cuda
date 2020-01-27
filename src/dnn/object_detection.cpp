@@ -176,6 +176,7 @@ int main(int argc, char** argv)
 
     // Frames capturing thread
     QueueFPS<Mat> framesQueue;
+	std::chrono::milliseconds frame_delay( 30 );
     std::thread framesThread([&](){
         Mat frame;
         while (process)
@@ -185,6 +186,7 @@ int main(int argc, char** argv)
                 framesQueue.push(frame.clone());
             else
                 break;
+			std::this_thread::sleep_for( frame_delay );
         }
     });
 
