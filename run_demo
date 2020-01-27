@@ -5,7 +5,7 @@ docker run --rm \
     --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$(pwd):/root/demos:rw" \
-    cuda4opencv/demos:opencv-4.2.0-cuda-10.0-cudnn7 \
+    cuda4opencv/demos:opencv-4.2.0-cuda-10.1-cudnn7 \
     /root/demos/build/$1
 xhost -local:root
 

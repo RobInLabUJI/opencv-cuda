@@ -1,5 +1,5 @@
 docker run --rm \
     --volume="$(pwd):/root/demos:rw" \
-    cuda4opencv/demos:opencv-4.2.0-cuda-10.0-cudnn7 \
+    cuda4opencv/demos:opencv-4.2.0-cuda-10.1-cudnn7 \
     /bin/bash -c "mkdir -p build && cd build && cmake .. && make"
 

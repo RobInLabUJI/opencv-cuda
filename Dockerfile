@@ -2,6 +2,8 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 ARG OPENCV_VERSION=4.2.0
 
+RUN sudo apt -y remove x264 libx264-dev
+
 RUN apt-get update && \
         apt-get install -y \
         cmake g++ build-essential git wget unzip yasm pkg-config \
@@ -9,12 +11,12 @@ RUN apt-get update && \
         libcairo-dev libgdk-pixbuf2.0-dev libswscale.dev libgphoto2-dev \
         libdc1394-22-dev libavcodec-dev libavformat-dev libavutil-dev \
         libwebp-dev libpng-dev libtiff-dev libopenexr-dev \
-        libswscale-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev \
-        libtiff-dev libjasper-dev libavformat-dev libpq-dev \
-        libxine2-dev libglew-dev libtiff5-dev zlib1g-dev \
+        libswscale-dev libtbb2 libtbb-dev libjpeg8-dev libpng-dev \
+        libtiff-dev libjasper1-dev libavformat-dev libpq-dev \
+        libxine2-dev libglew-dev libtiff-dev zlib1g-dev \
         libpng12-dev libjasper-dev libavcodec-dev libavformat-dev \
         libavutil-dev libpostproc-dev libswscale-dev libeigen3-dev \
-        libtbb-dev libgtk2.0-dev libvtk6-dev libxine2 \
+        libtbb-dev libgtk2.0-dev libvtk6-dev libxine2-dev \
         && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
