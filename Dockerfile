@@ -2,6 +2,11 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 
 ARG OPENCV_VERSION=4.2.0
 
+RUN ln -fs /usr/share/zoneinfo/Europe/Brussels /etc/localtime && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get install -y tzdata && \
+    dpkg-reconfigure --frontend noninteractive tzdata
+
 RUN apt-get update && \
         apt-get install -y \
         software-properties-common \
