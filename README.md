@@ -34,7 +34,7 @@ Press 'c' to use CPU, 'g' to use GPU, or 'q' to terminate.
 
 5. Run the DNN example
 
-Download the file [yolov3.weights](https://pjreddie.com/media/files/yolov3.weights) into to the `src/dnn` folder.
+Download the file [yolov3.weights](https://pjreddie.com/media/files/yolov3.weights) into the `src/dnn` folder.
 ```
 ./run_bash
 ./src/dnn/run_object_detection
