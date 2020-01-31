@@ -20,7 +20,7 @@ git checkout dnn
 ```
 2. Pull the Docker image
 ```
-docker pull cuda4opencv/demos:opencv-4.2.0-cuda-10.1
+docker pull cuda4opencv/demos:opencv-4.2.0-cuda-10.1-cudnn7
 ```
 3. Compile the demos
 ```
