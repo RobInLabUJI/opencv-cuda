@@ -54,4 +54,4 @@ This can take ~30 minutes or longer, depending on the PC hardware.
 
 <hr>
 
-[1]: [nvidia-docker 2.0](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) can be used, but you should replace `--gpus all` with `--runtime nvidia` in the `run_demo` script.
+[1]: [nvidia-docker 2.0](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) can be used, but you should replace `--gpus all` with `--runtime nvidia` in the `run_demo` and `run_bash` scripts.
