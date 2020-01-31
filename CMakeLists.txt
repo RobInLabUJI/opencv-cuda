@@ -25,4 +25,4 @@ target_link_libraries( orb ${OpenCV_LIBS} )
 
 add_executable( dnn_object_detection src/dnn/object_detection.cpp)
 
-target_link_libraries( dnn_object_detection ${OpenCV_LIBS} )
+target_link_libraries( dnn_object_detection ${OpenCV_LIBS} pthread )

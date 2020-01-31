@@ -1,0 +1,1 @@
+../../build/dnn_object_detection --config=yolov3.cfg --model=yolov3.weights --width=416 --height=416 --scale=0.00392 --rgb --input=../../project_video.mp4 --classes=coco.names --backend=5 --target=6
