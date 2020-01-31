@@ -12,10 +12,11 @@ Note that you do not need to install the CUDA toolkit on the host, but the drive
 
 ## Quickstart
 
-1. Clone this repository
+1. Clone this repository and select the `dnn`branch
 ```
 git clone https://github.com/RobInLabUJI/opencv-cuda.git
 cd opencv-cuda
+git checkout dnn
 ```
 2. Pull the Docker image
 ```
@@ -30,8 +31,15 @@ docker pull cuda4opencv/demos:opencv-4.2.0-cuda-10.1
 ./run_demo [canny | orb | optical_flow]
 ```
 Press 'c' to use CPU, 'g' to use GPU, or 'q' to terminate.
+
 5. Run the DNN example
 
+Download the file [yolov3.weights](https://pjreddie.com/media/files/yolov3.weights) into to the `src/dnn` folder.
+```
+./run_bash
+./src/dnn/run_object_detection
+./src/dnn/run_object_detection_cuda
+```
 ## Building the Docker image
 This can take ~30 minutes or longer, depending on the PC hardware.
 ```
