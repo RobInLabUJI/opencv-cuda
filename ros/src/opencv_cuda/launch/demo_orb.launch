@@ -1,0 +1,14 @@
+<launch>
+  <node name="video_stream" pkg="video_stream_opencv" type="video_stream">
+    <param name="video_stream_provider" value="/root/demos/project_video.mp4" />
+    <param name="fps" value="25" />
+    <param name="loop_videofile" value="true" />
+  </node>
+
+  <node name="orb" pkg="opencv_cuda" type="image_transport" />
+
+  <node name="viewer" pkg="image_view" type="image_view">
+    <remap from="image" to="output_video" />
+  </node>
+</launch>
+

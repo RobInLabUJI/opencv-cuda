@@ -6,6 +6,6 @@ docker run --rm \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume="$(pwd):/root/demos:rw" \
     cuda4opencv/demos:ros-kinetic \
-    /root/demos/build/$1
+    /bin/bash -c "source /opt/ros/kinetic/setup.bash && source /root/demos/ros/devel/setup.bash && roslaunch opencv_cuda demo_orb.launch"
 xhost -local:root
 
