@@ -1,5 +1,5 @@
 docker run --rm \
     --volume="$(pwd):/root/demos:rw" \
-    cuda4opencv/demos:opencv-3.4.0-cuda-8.0 \
+    cuda4opencv/demos:ros-kinetic \
     /bin/bash -c "mkdir -p build && cd build && cmake .. && make"
 

@@ -1,1 +1,1 @@
-docker build -t cuda4opencv/demos:opencv-3.4.0-cuda-8.0 .
+docker build -t cuda4opencv/demos:ros-kinetic .
