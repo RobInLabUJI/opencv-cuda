@@ -5,7 +5,7 @@
   </node>
 
   <node name="orb" pkg="opencv_cuda" type="orb_demo">
-    <param name="use_gpu" value="false" />
+    <param name="use_gpu" value="true" />
   </node>
 
   <node name="viewer" pkg="image_view" type="image_view">

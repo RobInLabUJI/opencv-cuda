@@ -1,0 +1,11 @@
+xhost +local:root
+docker run --rm \
+    --gpus all \
+    --env="DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    --volume="$(pwd):/root/demos:rw" \
+    cuda4opencv/demos:ros-kinetic \
+    /bin/bash -c "source /opt/ros/kinetic/setup.bash && source /root/demos/ros/devel/setup.bash && roslaunch opencv_cuda demo_orb_cuda.launch"
+xhost -local:root
+

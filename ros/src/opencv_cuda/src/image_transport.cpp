@@ -60,7 +60,8 @@ public:
     image_sub_ = it_.subscribe("/image_raw", 1,
       &ImageConverter::imageCb, this);
     image_pub_ = it_.advertise("/output_video", 1);
-    use_gpu_ = true;
+    ros::NodeHandle private_nh("~");
+    private_nh.getParam("use_gpu", use_gpu_);
   }
 
   ~ImageConverter()
@@ -103,7 +104,7 @@ public:
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "image_converter");
+  ros::init(argc, argv, "orb_demo");
   ImageConverter ic;
   ros::spin();
   return 0;
