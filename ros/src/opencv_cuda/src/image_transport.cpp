@@ -7,7 +7,7 @@
 
 #include <opencv2/opencv.hpp>
 
-void cpu_processing(cv_bridge::CvImagePtr src, cv_bridge::CvImagePtr dst)
+cv_bridge::CvImagePtr cpu_processing(cv_bridge::CvImagePtr src)
 {
 
   cv::Mat src_gray, descriptors;
@@ -22,12 +22,15 @@ void cpu_processing(cv_bridge::CvImagePtr src, cv_bridge::CvImagePtr dst)
   //dst = cv::Scalar::all(0);
 
   cv::drawKeypoints( src->image, keypoints, src->image, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT );
+
+  return src;
 }
 
-//extern void cpu_processing(cv::Mat& in, cv::Mat& out);
-//extern void gpu_processing(cv::Mat& in, cv::Mat& out);
+cv_bridge::CvImagePtr gpu_processing(cv_bridge::CvImagePtr src)
+{
+}
 
-static const std::string OPENCV_WINDOW = "Image window";
+//static const std::string OPENCV_WINDOW = "Image window";
 
 class ImageConverter
 {
@@ -35,6 +38,7 @@ class ImageConverter
   image_transport::ImageTransport it_;
   image_transport::Subscriber image_sub_;
   image_transport::Publisher image_pub_;
+  bool use_gpu_;
 
 public:
   ImageConverter()
@@ -44,7 +48,7 @@ public:
     image_sub_ = it_.subscribe("/camera", 1,
       &ImageConverter::imageCb, this);
     image_pub_ = it_.advertise("/output_video", 1);
-
+    use_gpu_ = false;
     //cv::namedWindow(OPENCV_WINDOW);
   }
 
@@ -73,11 +77,25 @@ public:
     // Update GUI Window
     //cv::imshow(OPENCV_WINDOW, cv_ptr->image);
     //cv::waitKey(3);
-    cpu_processing(cv_ptr, dst);
+    double ticks = (double)cv::getTickCount();
+    if (use_gpu_) {
+        dst = gpu_processing(cv_ptr);
+    } else {
+        dst = cpu_processing(cv_ptr);
+    }
+    ticks = ((double)cv::getTickCount() - ticks)/cv::getTickFrequency()*1000;
+    cv::String message;
+    if (use_gpu_) {
+      message = cv::format("GPU processing time[ms]=%.3f", ticks);
+    } else {
+      message = cv::format("CPU processing time[ms]=%.3f", ticks);       
+    }
+    cv::putText(dst->image, message, cv::Point(30, 90), 
+                cv::FONT_HERSHEY_SIMPLEX, 1.5, cv::Scalar(0,0,255), 3);
     
     // Output modified video stream
     //image_pub_.publish(cv_ptr->toImageMsg());
-    image_pub_.publish(cv_ptr->toImageMsg());
+    image_pub_.publish(dst->toImageMsg());
   }
 };
 
