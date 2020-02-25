@@ -5,7 +5,7 @@
     <param name="loop_videofile" value="true" />
   </node>
 
-  <node name="orb" pkg="opencv_cuda" type="image_transport" />
+  <node name="orb" pkg="opencv_cuda" type="orb_demo" />
 
   <node name="viewer" pkg="image_view" type="image_view">
     <remap from="image" to="output_video" />

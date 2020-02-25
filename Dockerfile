@@ -107,13 +107,13 @@ RUN apt-get update && apt-get install -y \
     ros-kinetic-ros-base=1.3.2-0* \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y \
-    ros-kinetic-perception=1.3.2-0* \
-    && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y \
+#    ros-kinetic-perception=1.3.2-0* \
+#    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y \
-    ros-kinetic-video-stream-opencv \
-    && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y \
+#    ros-kinetic-video-stream-opencv \
+#    && rm -rf /var/lib/apt/lists/*
 
 # setup entrypoint
 COPY ./ros_entrypoint.sh /

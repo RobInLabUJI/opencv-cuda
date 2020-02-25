@@ -6,10 +6,11 @@
 #include <opencv2/highgui/highgui.hpp>
 
 #include <opencv2/opencv.hpp>
+#include <opencv2/cudaimgproc.hpp>
+#include <opencv2/cudafilters.hpp>
 
 cv_bridge::CvImagePtr cpu_processing(cv_bridge::CvImagePtr src)
 {
-
   cv::Mat src_gray, descriptors;
   std::vector<cv::KeyPoint> keypoints;
 
@@ -19,8 +20,6 @@ cv_bridge::CvImagePtr cpu_processing(cv_bridge::CvImagePtr src)
   detector->detect(src_gray, keypoints);
   detector->compute(src_gray, keypoints, descriptors);
 
-  //dst = cv::Scalar::all(0);
-
   cv::drawKeypoints( src->image, keypoints, src->image, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT );
 
   return src;
@@ -28,9 +27,22 @@ cv_bridge::CvImagePtr cpu_processing(cv_bridge::CvImagePtr src)
 
 cv_bridge::CvImagePtr gpu_processing(cv_bridge::CvImagePtr src)
 {
-}
+  cv::cuda::GpuMat gpuInImage, gpuOutImage;
+  gpuInImage.upload(src->image);
 
-//static const std::string OPENCV_WINDOW = "Image window";
+  std::vector<cv::KeyPoint> keypoints;
+
+  cv::cuda::GpuMat src_gray, descriptors;
+  cv::cuda::cvtColor( gpuInImage, src_gray, cv::COLOR_BGR2GRAY );
+
+  cv::Ptr< cv::cuda::ORB > detector = cv::cuda::ORB::create();
+
+  detector->detect(src_gray, keypoints);
+  detector->compute(src_gray, keypoints, descriptors);
+
+  cv::drawKeypoints( src->image, keypoints, src->image, cv::Scalar::all(-1), cv::DrawMatchesFlags::DEFAULT );
+  return src;
+}
 
 class ImageConverter
 {
@@ -45,16 +57,14 @@ public:
     : it_(nh_)
   {
     // Subscribe to input video feed and publish output video feed
-    image_sub_ = it_.subscribe("/camera", 1,
+    image_sub_ = it_.subscribe("/image_raw", 1,
       &ImageConverter::imageCb, this);
     image_pub_ = it_.advertise("/output_video", 1);
-    use_gpu_ = false;
-    //cv::namedWindow(OPENCV_WINDOW);
+    use_gpu_ = true;
   }
 
   ~ImageConverter()
   {
-    //cv::destroyWindow(OPENCV_WINDOW);
   }
 
   void imageCb(const sensor_msgs::ImageConstPtr& msg)
@@ -70,13 +80,6 @@ public:
       return;
     }
 
-    // Draw an example circle on the video stream
-    //if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
-    //  cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
-
-    // Update GUI Window
-    //cv::imshow(OPENCV_WINDOW, cv_ptr->image);
-    //cv::waitKey(3);
     double ticks = (double)cv::getTickCount();
     if (use_gpu_) {
         dst = gpu_processing(cv_ptr);
@@ -94,7 +97,6 @@ public:
                 cv::FONT_HERSHEY_SIMPLEX, 1.5, cv::Scalar(0,0,255), 3);
     
     // Output modified video stream
-    //image_pub_.publish(cv_ptr->toImageMsg());
     image_pub_.publish(dst->toImageMsg());
   }
 };

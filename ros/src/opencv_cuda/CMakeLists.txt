@@ -15,7 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
 )
 
-find_package(OpenCV REQUIRED)
+find_package(OpenCV REQUIRED
+  PATHS /usr/local
+  NO_DEFAULT_PATH
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -137,8 +140,8 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(image_transport src/image_transport.cpp)
-target_link_libraries(image_transport ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_executable(orb_demo src/image_transport.cpp)
+target_link_libraries(orb_demo ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

@@ -6,5 +6,5 @@ docker run --rm \
 docker run --rm \
     --volume="$(pwd):/root/demos:rw" \
     cuda4opencv/demos:ros-kinetic \
-    /bin/bash -c "cd ros && catkin_make"
+    /bin/bash -c "cd ros && catkin_make -DOpenCV_DIR=/usr/local/share/OpenCV"
 
