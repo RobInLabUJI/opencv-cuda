@@ -14,9 +14,8 @@ Note that you do not need to install the CUDA toolkit on the host, but the drive
 
 1. Clone this repository
 ```
-git clone --recurse-submodules https://github.com/RobInLabUJI/opencv-cuda.git
+git clone -b ros --recurse-submodules https://github.com/RobInLabUJI/opencv-cuda.git
 cd opencv-cuda
-git checkout ros
 ```
 2. Pull the Docker image
 ```
