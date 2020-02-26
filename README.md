@@ -14,12 +14,13 @@ Note that you do not need to install the CUDA toolkit on the host, but the drive
 
 1. Clone this repository
 ```
-git clone https://github.com/RobInLabUJI/opencv-cuda.git
+git clone --recurse-submodules https://github.com/RobInLabUJI/opencv-cuda.git
 cd opencv-cuda
+git checkout ros
 ```
 2. Pull the Docker image
 ```
-docker pull cuda4opencv/demos:opencv-3.4.0-cuda-8.0
+docker pull cuda4opencv/demos:ros-kinetic
 ```
 3. Compile the demos
 ```
@@ -31,6 +32,14 @@ docker pull cuda4opencv/demos:opencv-3.4.0-cuda-8.0
 ```
 Press 'c' to use CPU, 'g' to use GPU, or 'q' to terminate.
 
+5. Run the ROS example
+```
+./launch_demo
+```
+or
+```
+./launch_demo_cuda
+```
 ## Building the Docker image
 This can take ~30 minutes or longer, depending on the PC hardware.
 ```
